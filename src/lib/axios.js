@@ -11,10 +11,11 @@ axiosInstance.interceptors.response.use(
     (response) => response,
     async (error) => {
         const config = error.config;
+        const status = error.response?.status;
+        const isRateLimited = status === 429;
+        const isServerError = status >= 500;
 
-        const isServerError = error.response?.status >= 500;
-
-        if (!isServerError) {
+        if (!config || (!isRateLimited && !isServerError)) {
             return Promise.reject(error);
         }
 
@@ -26,8 +27,13 @@ axiosInstance.interceptors.response.use(
 
         config._retryCount += 1;
 
+        const retryAfterHeader = Number(error.response?.headers?.["retry-after"]);
+        const retryDelay = Number.isFinite(retryAfterHeader)
+            ? retryAfterHeader * 1000
+            : RETRY_DELAY_MS * config._retryCount * (isRateLimited ? 2 : 1);
+
         await new Promise((resolve) =>
-            setTimeout(resolve, RETRY_DELAY_MS * config._retryCount)
+            setTimeout(resolve, retryDelay)
         );
 
         return axiosInstance(config);

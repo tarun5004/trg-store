@@ -38,13 +38,13 @@ function AppRoutes() {
         {
           path: "/",
           loader: async () => {
-            const [categories, trending, newArrivals, bestSellers] =
-              await Promise.all([
-                getProductsCategories(),
-                getTrendingProducts({ limit: 10, skip: 85 }),
-                getTrendingProducts({ limit: 10, skip: 125 }),
-                getTrendingProducts({ limit: 10, skip: 155 }),
-              ]);
+            const [categories, allProducts] = await Promise.all([
+              getProductsCategories(),
+              getAllProducts(),
+            ]);
+            const trending = allProducts.slice(8, 18);
+            const newArrivals = allProducts.slice(18, 28);
+            const bestSellers = allProducts.slice(28, 38);
             return { categories, trending, newArrivals, bestSellers };
           },
           hydrateFallbackElement: <Loading />,
