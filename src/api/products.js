@@ -27,6 +27,14 @@ const setCachedValue = (key, value) => {
     return value;
 };
 
+const ensureValue = (value, message) => {
+    if (typeof value === "undefined") {
+        throw new Error(message);
+    }
+
+    return value;
+};
+
 const cachedGet = async (url, selectData = (data) => data) => {
     const cachedValue = getCachedValue(url);
 
@@ -40,7 +48,9 @@ const cachedGet = async (url, selectData = (data) => data) => {
 
     const request = axiosInstance
         .get(url)
-        .then((res) => setCachedValue(url, selectData(res.data)))
+        .then((res) =>
+            setCachedValue(url, ensureValue(selectData(res.data), `Unexpected API response for ${url}`))
+        )
         .finally(() => {
             inflightRequests.delete(url);
         });
@@ -108,7 +118,10 @@ export const searchProducts = async (query) => {
 export const getProductsCategories = async () => {
     try {
         return await cachedGet("/products/categories", (data) =>
-            Array.isArray(data) ? data : []
+            ensureValue(
+                Array.isArray(data) ? data : undefined,
+                "Unexpected categories response"
+            )
         );
     } catch (error) {
         throw new Error("Failed to fetch product categories", { cause: error });
