@@ -9,6 +9,7 @@ import {
   getTrendingProducts,
 } from "@/api/products.js";
 import Loading from "@/components/common/Loading.jsx";
+import RouteError from "@/components/common/RouteError.jsx";
 import MainLayout from "@/layouts/MainLayout.jsx";
 import AuthLayout from "../layouts/AuthLayout.jsx";
 
@@ -33,15 +34,14 @@ function AppRoutes() {
     {
       path: "/",
       element: <MainLayout />,
+      errorElement: <RouteError />,
       hydrateFallbackElement: <Loading />,
       children: [
         {
           path: "/",
           loader: async () => {
-            const [categories, allProducts] = await Promise.all([
-              getProductsCategories(),
-              getAllProducts(),
-            ]);
+            const allProducts = await getAllProducts();
+            const categories = await getProductsCategories();
             const trending = allProducts.slice(8, 18);
             const newArrivals = allProducts.slice(18, 28);
             const bestSellers = allProducts.slice(28, 38);
@@ -155,6 +155,7 @@ function AppRoutes() {
     {
       path: "/auth",
       element: <AuthLayout />,
+      errorElement: <RouteError />,
       hydrateFallbackElement: <Loading />,
       children: [
         {

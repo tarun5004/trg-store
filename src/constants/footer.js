@@ -60,8 +60,8 @@ export const FooterData = {
                     to: "mailto:hello@trgstore.com",
                 },
                 {
-                    label: "+91 98765 43210",
-                    to: "tel:+919876543210",
+                    label: "+91 93890 43228",
+                    to: "tel:+919389043228",
                 },
                 {
                     label: "Jaipur, Rajasthan",

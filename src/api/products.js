@@ -35,6 +35,12 @@ const ensureValue = (value, message) => {
     return value;
 };
 
+const formatCategoryName = (slug) =>
+    slug
+        .split("-")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" ");
+
 const cachedGet = async (url, selectData = (data) => data) => {
     const cachedValue = getCachedValue(url);
 
@@ -117,12 +123,13 @@ export const searchProducts = async (query) => {
 
 export const getProductsCategories = async () => {
     try {
-        return await cachedGet("/products/categories", (data) =>
-            ensureValue(
-                Array.isArray(data) ? data : undefined,
-                "Unexpected categories response"
-            )
-        );
+        const allProducts = await getAllProducts();
+        const uniqueCategories = [...new Set(allProducts.map((product) => product.category))];
+
+        return uniqueCategories.map((slug) => ({
+            slug,
+            name: formatCategoryName(slug),
+        }));
     } catch (error) {
         throw new Error("Failed to fetch product categories", { cause: error });
     }

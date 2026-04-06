@@ -1,7 +1,11 @@
 import axios from "axios";
 
+const configuredApiBaseUrl = import.meta.env.VITE_API_URL?.trim();
 const apiBaseUrl =
-    import.meta.env.VITE_API_URL?.trim() || "https://dummyjson.com";
+    configuredApiBaseUrl &&
+    !configuredApiBaseUrl.includes("dummyjson.com")
+        ? configuredApiBaseUrl
+        : "/api";
 
 const axiosInstance = axios.create({
     baseURL: apiBaseUrl,
