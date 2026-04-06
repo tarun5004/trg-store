@@ -4,26 +4,35 @@ import { Heading } from "../ui/Headings";
 
 function Trust({ isTitleHidden = false }) {
     return (
-        <div className="flex flex-col gap-14 items-center">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full">
+        <section className="rounded-[2.2rem] border border-border/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(247,240,235,0.92))] p-6 shadow-[0_25px_70px_-55px_rgba(63,29,22,0.4)] sm:p-8">
+            <div className="space-y-3">
+                <Heading size="small" className="text-primary/70">
+                    Why shoppers stay
+                </Heading>
+                {!isTitleHidden && (
+                    <Heading size="h3">
+                        Premium presentation backed by the same dependable shopping flow.
+                    </Heading>
+                )}
+            </div>
+
+            <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
                 {trustItems.map((trust, idx) => (
-                    <div key={idx} className="flex flex-col items-center gap-4">
-                        {trust.icon}
-                        <div className="flex flex-col gap-2 items-center">
-                            <Heading size="h5" className={"font-medium"}>
-                                {trust.title}
-                            </Heading>
+                    <div
+                        key={idx}
+                        className="rounded-[1.8rem] border border-border/70 bg-white/95 p-6 shadow-sm"
+                    >
+                        <div className="mb-5 flex size-14 items-center justify-center rounded-3xl bg-muted/70">
+                            {trust.icon}
+                        </div>
+                        <div className="space-y-2">
+                            <Heading size="h5">{trust.title}</Heading>
                             <Heading size="p">{trust.description}</Heading>
                         </div>
                     </div>
                 ))}
             </div>
-            {!isTitleHidden && (
-                <Heading size="h4" className="text-center font-semibold">
-                    Trusted by over 1,000 customers across the globe
-                </Heading>
-            )}
-        </div>
+        </section>
     );
 }
 

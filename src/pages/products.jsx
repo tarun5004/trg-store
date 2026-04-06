@@ -17,7 +17,7 @@ function Products() {
     const { allProducts } = useLoaderData();
 
     useEffect(() => {
-        document.title = "EzStore — Products";
+        document.title = "TRG Store - Products";
     }, []);
 
     const [search, setSearch] = useState("");
@@ -80,27 +80,35 @@ function Products() {
     }, [allProducts, search, sortBy, stockFilters]);
 
     return (
-        <div className="flex flex-col gap-10">
-            <div className="flex flex-col gap-4">
-                <Breadcrumb>
-                    <BreadcrumbList>
-                        <BreadcrumbItem>
-                            <Link
-                                to="/"
-                                className="text-muted-foreground hover:text-foreground duration-300"
-                            >
-                                Home
-                            </Link>
-                        </BreadcrumbItem>
-                        <BreadcrumbSeparator />
-                        <BreadcrumbItem>
-                            <BreadcrumbPage>Products</BreadcrumbPage>
-                        </BreadcrumbItem>
-                    </BreadcrumbList>
-                </Breadcrumb>
-                <Heading size="h3" className={"font-semibold"}>
-                    All Products
-                </Heading>
+        <div className="flex flex-col gap-8 lg:gap-10">
+            <div className="rounded-[2.2rem] border border-border/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.97),rgba(246,239,234,0.95))] p-6 shadow-[0_22px_60px_-48px_rgba(63,29,22,0.45)] sm:p-8">
+                <div className="flex flex-col gap-4">
+                    <Breadcrumb>
+                        <BreadcrumbList>
+                            <BreadcrumbItem>
+                                <Link
+                                    to="/"
+                                    className="text-muted-foreground transition-colors duration-300 hover:text-foreground"
+                                >
+                                    Home
+                                </Link>
+                            </BreadcrumbItem>
+                            <BreadcrumbSeparator />
+                            <BreadcrumbItem>
+                                <BreadcrumbPage>Products</BreadcrumbPage>
+                            </BreadcrumbItem>
+                        </BreadcrumbList>
+                    </Breadcrumb>
+                    <div className="space-y-3">
+                        <Heading size="small" className="text-primary/70">
+                            Product directory
+                        </Heading>
+                        <Heading size="h3">Browse the full TRG Store catalog.</Heading>
+                        <Heading size="p" className="leading-7">
+                            The product logic stays the same, but the presentation now feels cleaner, more spacious, and more premium.
+                        </Heading>
+                    </div>
+                </div>
             </div>
 
             <ProductOptions
@@ -116,9 +124,9 @@ function Products() {
             />
 
             {displayedProducts.length === 0 ? (
-                <div className="flex flex-col items-center justify-center gap-4 py-20">
+                <div className="flex flex-col items-center justify-center gap-4 rounded-[2rem] border border-border/70 bg-white/90 px-6 py-20 text-center shadow-sm">
                     <PackageSearch className="size-16 text-muted-foreground" />
-                    <div className="flex flex-col items-center">
+                    <div className="flex flex-col items-center gap-1">
                         <Heading size="h6" className="font-semibold">
                             No products found
                         </Heading>
@@ -131,7 +139,7 @@ function Products() {
                     </Button>
                 </div>
             ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-x-6 gap-y-14">
+                <div className="grid grid-cols-1 gap-x-6 gap-y-8 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
                     {displayedProducts.map((product) => (
                         <ProductCard key={product.id} product={product} />
                     ))}

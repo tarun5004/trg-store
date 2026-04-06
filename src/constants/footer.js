@@ -3,7 +3,7 @@ import { FaFacebook, FaGithub, FaInstagram, FaXTwitter } from "react-icons/fa6";
 export const FooterData = {
     menus: [
         {
-            title: "Our Sitemap",
+            title: "Explore",
             links: [
                 {
                     label: "Home",
@@ -24,7 +24,7 @@ export const FooterData = {
             ],
         },
         {
-            title: "Customer Service",
+            title: "Customer Care",
             links: [
                 {
                     label: "Wishlist",
@@ -53,19 +53,19 @@ export const FooterData = {
             ],
         },
         {
-            title: "Contact Us",
+            title: "TRG Store HQ",
             links: [
                 {
-                    label: "harshitostwal1234@gmail.com",
-                    to: "mailto:harshitostwal1234@gmail.com",
+                    label: "hello@trgstore.com",
+                    to: "mailto:hello@trgstore.com",
                 },
                 {
-                    label: "+1 (800) 123-4567",
-                    to: "tel:+18001234567",
+                    label: "+91 98765 43210",
+                    to: "tel:+919876543210",
                 },
                 {
-                    label: "San Francisco, CA 94103",
-                    to: "https://www.google.com/maps/place/San+Francisco,+CA+94103",
+                    label: "Jaipur, Rajasthan",
+                    to: "https://www.google.com/maps/place/Jaipur,+Rajasthan",
                 },
             ],
         },

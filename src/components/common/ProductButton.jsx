@@ -4,23 +4,15 @@ import { Heading } from "../ui/Headings";
 
 function ProductButton({ productCart, increaseQuantity, decreaseQuantity }) {
     return (
-        <div className="flex items-center text-center gap-4 sm:gap-8">
-            <Button
-                onClick={decreaseQuantity}
-                variant="outline"
-                className={"flex-1"}
-            >
-                - 1
+        <div className="flex flex-1 items-center justify-between rounded-full border border-border/80 bg-white/95 px-2 py-2 shadow-sm">
+            <Button onClick={decreaseQuantity} variant="ghost" className="h-10 px-4">
+                -1
             </Button>
-            <Heading size="h6" className="font-semibold flex-1">
+            <Heading size="h6" className="px-4 text-center font-semibold">
                 {productCart.quantity}
             </Heading>
-            <Button
-                onClick={increaseQuantity}
-                variant="outline"
-                className={"flex-1"}
-            >
-                + 1
+            <Button onClick={increaseQuantity} variant="ghost" className="h-10 px-4">
+                +1
             </Button>
         </div>
     );

@@ -7,48 +7,46 @@ import { Separator } from "../ui/separator";
 
 function Footer() {
     return (
-        <footer className="w-full flex flex-col gap-10 pt-20 pb-0">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 w-full gap-14">
-                <div className="flex flex-col gap-4">
-                    <Link to="/">
-                        <Heading
-                            size="h4"
-                            className="font-bold inline-flex items-center gap-2"
-                        >
-                            <ShoppingBag className="text-amber-500 stroke-3" />{" "}
-                            EzStore
-                        </Heading>
+        <footer className="mt-6 w-full overflow-hidden rounded-[2.2rem] border border-border/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.97),rgba(246,239,234,0.95))] p-6 shadow-[0_25px_70px_-55px_rgba(63,29,22,0.45)] sm:p-8">
+            <div className="grid gap-8 xl:grid-cols-[1.2fr_0.8fr_0.8fr_0.8fr]">
+                <div className="space-y-5">
+                    <Link to="/" className="inline-flex items-center gap-3">
+                        <span className="flex size-14 items-center justify-center rounded-2xl bg-primary text-primary-foreground shadow-[0_18px_35px_-22px_rgba(86,39,29,0.95)]">
+                            <ShoppingBag className="stroke-[2.4]" />
+                        </span>
+                        <div className="space-y-1">
+                            <Heading size="small" className="text-primary/70">
+                                Tarun Raj Gaur
+                            </Heading>
+                            <Heading size="h5">TRG Store</Heading>
+                        </div>
                     </Link>
-                    <Heading size="p">
-                        Your one-stop shop for all your needs. Quality products,
-                        fast delivery, and exceptional customer service.
+                    <Heading size="p" className="leading-7">
+                        A premium retail refresh built for fashion, beauty, and lifestyle shopping with the same dependable flow underneath.
                     </Heading>
-                    <div className="flex items-center gap-6">
-                        {FooterData.socialMedia.map(
-                            ({ icon: Icon, to, label }) => (
-                                <Link to={to} key={label}>
-                                    <Icon size={32} />
-                                </Link>
-                            )
-                        )}
+                    <div className="flex items-center gap-3">
+                        {FooterData.socialMedia.map(({ icon: Icon, to, label }) => (
+                            <Link
+                                to={to}
+                                key={label}
+                                className="flex size-11 items-center justify-center rounded-full border border-border/70 bg-white/90 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:text-primary"
+                            >
+                                <Icon size={18} />
+                            </Link>
+                        ))}
                     </div>
                 </div>
 
                 {FooterData.menus.map((menu, idx) => (
                     <div className="flex flex-col gap-4" key={idx}>
-                        <Heading
-                            size="p"
-                            className={
-                                "uppercase text-foreground font-semibold"
-                            }
-                        >
+                        <Heading size="small" className="text-primary/70">
                             {menu.title}
                         </Heading>
-                        {menu.links.map((site, idx) => (
-                            <Link key={idx} to={site.to} className="w-fit">
+                        {menu.links.map((site, linkIdx) => (
+                            <Link key={linkIdx} to={site.to} className="w-fit">
                                 <Heading
                                     size="p"
-                                    className="hover:text-foreground font-medium transition-colors duration-200"
+                                    className="text-base transition-colors duration-200 hover:text-foreground"
                                 >
                                     {site.label}
                                 </Heading>
@@ -58,15 +56,14 @@ function Footer() {
                 ))}
             </div>
 
-            <Separator />
+            <Separator className="my-8" />
 
-            <div className="flex flex-col sm:flex-row items-center justify-between">
-                <Heading size="p">
-                    &copy; {new Date().getFullYear()} EzStore. All rights
-                    reserved.
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <Heading size="p" className="text-sm">
+                    &copy; {new Date().getFullYear()} TRG Store. Crafted for Tarun Raj Gaur.
                 </Heading>
-                <Heading size="p">
-                    Made with ♥ for great shopping experiences.
+                <Heading size="p" className="text-sm">
+                    Premium retail styling, same trusted shopping experience.
                 </Heading>
             </div>
         </footer>

@@ -4,13 +4,7 @@ import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
 import { Button } from "@/components/ui/button";
-import {
-    Field,
-    FieldError,
-    FieldGroup,
-    FieldLabel,
-    FieldSet,
-} from "@/components/ui/field";
+import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Heading } from "@/components/ui/Headings";
 import {
     InputGroup,
@@ -29,7 +23,7 @@ function SignIn() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        document.title = "EzStore — Sign In";
+        document.title = "TRG Store - Sign In";
     }, []);
 
     const signInForm = useForm({
@@ -59,19 +53,20 @@ function SignIn() {
     };
 
     return (
-        <div className="flex flex-col gap-6 w-full">
+        <div className="flex w-full flex-col gap-6">
             <BadgeDollarSign
                 size={64}
-                className="p-4 bg-foreground text-background rounded-xl"
+                className="rounded-2xl bg-primary p-4 text-primary-foreground shadow-[0_20px_40px_-26px_rgba(86,39,29,0.95)]"
             />
             <div className="flex flex-col gap-2">
-                <Heading size="h5">
-                    <span className="font-normal">Welcome back to</span>{" "}
-                    <b>EzStore</b>
+                <Heading size="small" className="text-primary/70">
+                    Welcome back
                 </Heading>
-                <Heading size="h6" className="text-muted-foreground">
-                    Securely access your account and manage your store with
-                    ease.
+                <Heading size="h4">
+                    Sign in to <b>TRG Store</b>
+                </Heading>
+                <Heading size="p" className="leading-7">
+                    Access your account, saved wishlist, and cart in the new premium storefront experience.
                 </Heading>
             </div>
             <form
@@ -85,14 +80,14 @@ function SignIn() {
                         render={({ field, fieldState }) => (
                             <Field>
                                 <FieldLabel htmlFor="email">Email</FieldLabel>
-                                <InputGroup>
+                                <InputGroup className="bg-background/75">
                                     <InputGroupAddon>
                                         <Mail />
                                     </InputGroupAddon>
                                     <InputGroupInput
                                         id="email"
                                         type="email"
-                                        placeholder="abc@example.com"
+                                        placeholder="tarun@example.com"
                                         {...field}
                                     />
                                 </InputGroup>
@@ -115,18 +110,16 @@ function SignIn() {
                                     </FieldLabel>
                                     <Link
                                         to="/auth/reset-password"
-                                        className="text-muted-foreground font-medium hover:text-primary duration-300 hover:transition-colors active:text-primary decoration-wavy underline-offset-4 hover:underline active:underline"
+                                        className="font-medium text-muted-foreground underline-offset-4 transition-colors duration-300 hover:text-primary hover:underline"
                                     >
                                         Reset Password?
                                     </Link>
                                 </div>
-                                <InputGroup>
+                                <InputGroup className="bg-background/75">
                                     <InputGroupInput
                                         id="password"
-                                        type={
-                                            showPassword ? "text" : "password"
-                                        }
-                                        placeholder="•••••••••"
+                                        type={showPassword ? "text" : "password"}
+                                        placeholder="Enter your password"
                                         {...field}
                                     />
                                     <InputGroupAddon>
@@ -142,11 +135,7 @@ function SignIn() {
                                                 setShowPassword(!showPassword);
                                             }}
                                         >
-                                            {showPassword ? (
-                                                <Eye />
-                                            ) : (
-                                                <EyeOff />
-                                            )}
+                                            {showPassword ? <Eye /> : <EyeOff />}
                                         </InputGroupButton>
                                     </InputGroupAddon>
                                 </InputGroup>
@@ -164,10 +153,10 @@ function SignIn() {
             </form>
 
             <Heading size="p" className="text-center">
-                New to EzStore?{" "}
+                New to TRG Store?{" "}
                 <Link
                     to="/auth/sign-up"
-                    className="text-primary font-medium decoration-wavy underline-offset-4 hover:underline active:underline"
+                    className="font-medium text-primary underline-offset-4 hover:underline"
                 >
                     Create an account
                 </Link>

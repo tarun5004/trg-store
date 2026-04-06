@@ -44,7 +44,7 @@ function ProductDetails() {
     } = product;
 
     useEffect(() => {
-        document.title = `EzStore — ${title}`;
+        document.title = `TRG Store - ${title}`;
     }, [title]);
 
     const {
@@ -70,56 +70,71 @@ function ProductDetails() {
         []
     );
 
-    const discountPrice = (price - (price * discountPercentage) / 100).toFixed(
-        2
-    );
+    const discountPrice = (price - (price * discountPercentage) / 100).toFixed(2);
 
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: "smooth" });
     }, []);
 
     return (
-        <div className="flex flex-col gap-10 min-h-screen">
-            <div className="flex flex-col gap-4">
-                <Breadcrumb>
-                    <BreadcrumbList>
-                        <BreadcrumbItem>
-                            <Link
-                                to="/"
-                                className="text-muted-foreground hover:text-foreground duration-300"
-                            >
-                                Home
-                            </Link>
-                        </BreadcrumbItem>
-                        <BreadcrumbSeparator />
-                        <BreadcrumbItem>
-                            <Link
-                                to="/products"
-                                className="text-muted-foreground hover:text-foreground duration-300"
-                            >
-                                Products
-                            </Link>
-                        </BreadcrumbItem>
-                        <BreadcrumbSeparator />
-                        <BreadcrumbItem>
-                            <BreadcrumbPage>{title}</BreadcrumbPage>
-                        </BreadcrumbItem>
-                    </BreadcrumbList>
-                </Breadcrumb>
-                <div className="flex flex-col lg:flex-row gap-10">
-                    <div className="basis-1/2 w-full lg:flex hidden flex-col gap-4">
+        <div className="flex flex-col gap-10 lg:gap-14">
+            <div className="rounded-[2.2rem] border border-border/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.97),rgba(246,239,234,0.95))] p-6 shadow-[0_22px_60px_-48px_rgba(63,29,22,0.45)] sm:p-8">
+                <div className="flex flex-col gap-4">
+                    <Breadcrumb>
+                        <BreadcrumbList>
+                            <BreadcrumbItem>
+                                <Link
+                                    to="/"
+                                    className="text-muted-foreground transition-colors duration-300 hover:text-foreground"
+                                >
+                                    Home
+                                </Link>
+                            </BreadcrumbItem>
+                            <BreadcrumbSeparator />
+                            <BreadcrumbItem>
+                                <Link
+                                    to="/products"
+                                    className="text-muted-foreground transition-colors duration-300 hover:text-foreground"
+                                >
+                                    Products
+                                </Link>
+                            </BreadcrumbItem>
+                            <BreadcrumbSeparator />
+                            <BreadcrumbItem>
+                                <BreadcrumbPage>{title}</BreadcrumbPage>
+                            </BreadcrumbItem>
+                        </BreadcrumbList>
+                    </Breadcrumb>
+                    <div className="space-y-3">
+                        <Heading size="small" className="text-primary/70">
+                            Product spotlight
+                        </Heading>
+                        <Heading size="h3">{title}</Heading>
+                        <Heading size="p" className="leading-7">
+                            A cleaner detail page layout with the same pricing, cart, wishlist, and recommendation logic.
+                        </Heading>
+                    </div>
+                </div>
+            </div>
+
+            <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
+                <div className="space-y-4">
+                    <div className="hidden flex-col gap-4 lg:flex">
                         {images.map((image, idx) => (
-                            <ImageComp
+                            <div
                                 key={idx}
-                                src={image}
-                                alt={`Product Image ${idx + 1}`}
-                                className={
-                                    "w-full aspect-5/4 object-contain bg-muted rounded-4xl"
-                                }
-                            />
+                                className="overflow-hidden rounded-[2rem] border border-border/70 bg-white/92 p-4 shadow-sm"
+                            >
+                                <ImageComp
+                                    src={image}
+                                    alt={`Product Image ${idx + 1}`}
+                                    className="w-full aspect-[4/4.2] object-contain rounded-[1.5rem] bg-[linear-gradient(180deg,rgba(249,245,241,1),rgba(240,232,226,1))] p-4"
+                                />
+                            </div>
                         ))}
                     </div>
-                    <div className="basis-1/2 w-full lg:hidden flex flex-col gap-4">
+
+                    <div className="lg:hidden">
                         <Carousel
                             plugins={[autoplayPlugin]}
                             opts={{
@@ -129,113 +144,41 @@ function ProductDetails() {
                         >
                             <CarouselContent>
                                 {images.map((image, idx) => (
-                                    <CarouselItem
-                                        key={idx}
-                                        className={"w-full"}
-                                    >
-                                        <ImageComp
-                                            src={image}
-                                            alt={`Product Image ${idx + 1}`}
-                                            className={
-                                                "w-full aspect-5/4 object-contain bg-muted rounded-4xl"
-                                            }
-                                        />
+                                    <CarouselItem key={idx} className="w-full">
+                                        <div className="overflow-hidden rounded-[2rem] border border-border/70 bg-white/92 p-4 shadow-sm">
+                                            <ImageComp
+                                                src={image}
+                                                alt={`Product Image ${idx + 1}`}
+                                                className="w-full aspect-[4/4.2] rounded-[1.5rem] bg-[linear-gradient(180deg,rgba(249,245,241,1),rgba(240,232,226,1))] object-contain p-4"
+                                            />
+                                        </div>
                                     </CarouselItem>
                                 ))}
                             </CarouselContent>
                         </Carousel>
                     </div>
-                    <div
-                        className={cn(
-                            "basis-1/2 w-full flex flex-col gap-10",
-                            (images.length === 1 || images.length > 2) &&
-                                "sticky top-10 self-start"
-                        )}
-                    >
-                        <div className="flex flex-col gap-6">
-                            <Badge variant="outline" className={"h-12 px-6"}>
-                                {category
-                                    .split(" ")
-                                    .map(
-                                        (word) =>
-                                            word.charAt(0).toUpperCase() +
-                                            word.slice(1)
-                                    )
-                                    .join(" ")}
-                            </Badge>
-                            <Heading size="h4" className={"font-semibold"}>
-                                {title}
-                            </Heading>
+                </div>
 
-                            <div className="flex items-center gap-2">
-                                <div className="flex items-center gap-1">
-                                    {Array.from({ length: 5 }).map((_, idx) => (
-                                        <Star
-                                            key={idx}
-                                            className={cn(
-                                                rating > idx
-                                                    ? "fill-yellow-500 stroke-yellow-500"
-                                                    : "fill-muted stroke-muted-foreground/30"
-                                            )}
-                                        />
-                                    ))}
-                                </div>
-                                <Heading
-                                    size="p"
-                                    className={"text-muted-foreground"}
-                                >
-                                    {Math.floor(rating * 10) / 10} (
-                                    {reviews.length})
-                                </Heading>
-                            </div>
-
-                            <Heading
-                                size="h6"
-                                className={"text-muted-foreground"}
-                            >
-                                {description}
-                            </Heading>
-
-                            <div className="flex flex-wrap items-center gap-2">
-                                {tags.map((tag, idx) => (
-                                    <Badge
-                                        key={idx}
-                                        variant="secondary"
-                                        className={"h-10 px-4"}
-                                    >
-                                        {tag
-                                            .split(" ")
-                                            .map(
-                                                (word) =>
-                                                    word
-                                                        .charAt(0)
-                                                        .toUpperCase() +
-                                                    word.slice(1)
-                                            )
-                                            .join(" ")}
-                                    </Badge>
-                                ))}
-                            </div>
-
-                            <div className="flex flex-wrap items-center gap-4">
-                                <Heading
-                                    size="h3"
-                                    className="text-primary font-semibold"
-                                >
-                                    ${discountPrice}
-                                </Heading>
-                                <Heading
-                                    size="h5"
-                                    className="text-muted-foreground line-through"
-                                >
-                                    ${price}
-                                </Heading>
-                                <Badge variant="warning">
-                                    -{product.discountPercentage}%
+                <div
+                    className={cn(
+                        "space-y-8",
+                        (images.length === 1 || images.length > 2) &&
+                            "lg:sticky lg:top-28 lg:self-start"
+                    )}
+                >
+                    <div className="rounded-[2rem] border border-border/70 bg-white/92 p-6 shadow-sm sm:p-8">
+                        <div className="space-y-6">
+                            <div className="flex flex-wrap items-center gap-3">
+                                <Badge variant="outline" className="h-11 px-5">
+                                    {category
+                                        .split(" ")
+                                        .map(
+                                            (word) =>
+                                                word.charAt(0).toUpperCase() +
+                                                word.slice(1)
+                                        )
+                                        .join(" ")}
                                 </Badge>
-                            </div>
-
-                            <div className="flex items-center gap-4">
                                 <Badge
                                     variant={
                                         availabilityStatus === "In Stock"
@@ -245,26 +188,77 @@ function ProductDetails() {
                                               ? "destructive"
                                               : "warning"
                                     }
-                                    className={"h-10 px-4"}
+                                    className="h-11 px-5"
                                 >
-                                    {availabilityStatus
-                                        .split(" ")
-                                        .map(
-                                            (word) =>
-                                                word.charAt(0).toUpperCase() +
-                                                word.slice(1)
-                                        )
-                                        .join(" ")}
+                                    {availabilityStatus}
                                 </Badge>
-                                <Heading
-                                    size="p"
-                                    className={"text-muted-foreground"}
-                                >
-                                    {stock} units available
+                            </div>
+
+                            <div className="space-y-3">
+                                <Heading size="h3">{title}</Heading>
+                                <Heading size="p" className="leading-7">
+                                    {description}
                                 </Heading>
                             </div>
 
-                            <div className="flex items-center gap-1">
+                            <div className="flex items-center gap-2">
+                                <div className="flex items-center gap-1 rounded-full bg-muted/60 px-3 py-1.5">
+                                    {Array.from({ length: 5 }).map((_, idx) => (
+                                        <Star
+                                            key={idx}
+                                            className={cn(
+                                                "size-4",
+                                                rating > idx
+                                                    ? "fill-yellow-500 stroke-yellow-500"
+                                                    : "fill-muted stroke-muted-foreground/30"
+                                            )}
+                                        />
+                                    ))}
+                                </div>
+                                <Heading size="p">
+                                    {Math.floor(rating * 10) / 10} rating from {reviews.length} reviews
+                                </Heading>
+                            </div>
+
+                            <div className="flex flex-wrap items-end gap-3">
+                                <Heading size="h3" className="font-semibold text-primary">
+                                    ${discountPrice}
+                                </Heading>
+                                <Heading
+                                    size="h6"
+                                    className="line-through text-muted-foreground"
+                                >
+                                    ${price}
+                                </Heading>
+                                <Badge variant="warning">-{discountPercentage}%</Badge>
+                            </div>
+
+                            <div className="flex flex-wrap items-center gap-3">
+                                <Heading size="p">
+                                    <span className="font-semibold text-foreground">
+                                        {stock}
+                                    </span>{" "}
+                                    units available
+                                </Heading>
+                                {tags.map((tag, idx) => (
+                                    <Badge
+                                        key={idx}
+                                        variant="secondary"
+                                        className="h-10 px-4"
+                                    >
+                                        {tag
+                                            .split(" ")
+                                            .map(
+                                                (word) =>
+                                                    word.charAt(0).toUpperCase() +
+                                                    word.slice(1)
+                                            )
+                                            .join(" ")}
+                                    </Badge>
+                                ))}
+                            </div>
+
+                            <div className="flex items-center gap-2">
                                 {!productCart ? (
                                     <>
                                         <Button
@@ -274,10 +268,7 @@ function ProductDetails() {
                                         >
                                             Add to Cart
                                         </Button>
-                                        <Button
-                                            variant="default"
-                                            className="flex-1"
-                                        >
+                                        <Button variant="default" className="flex-1">
                                             Buy Now
                                         </Button>
                                     </>
@@ -306,47 +297,42 @@ function ProductDetails() {
                                     className={cn(
                                         whishlistProduct && "border-pink-500"
                                     )}
-                                    size="icon-lg"
+                                    size="icon"
                                 >
                                     <Heart
                                         className={cn(
                                             whishlistProduct &&
                                                 "fill-pink-400 stroke-pink-500",
-                                            "group-hover/btn:fill-pink-400 group-hover/btn:stroke-pink-500"
+                                            "fill-transparent stroke-current transition-colors duration-300 hover:fill-pink-400 hover:stroke-pink-500"
                                         )}
                                     />
                                 </Button>
                             </div>
                         </div>
+                    </div>
 
-                        <Separator />
+                    <div className="rounded-[2rem] border border-border/70 bg-white/92 p-6 shadow-sm sm:p-8">
+                        <Heading size="h5" className="font-semibold">
+                            Additional Information
+                        </Heading>
 
-                        <div className="flex flex-col gap-4">
-                            <Heading size="h5" className={"font-medium"}>
-                                Additional Information
-                            </Heading>
-
-                            <div className="grid grid-cols-1 gap-4">
-                                {ProductDetailInfo(product).map((info, idx) => (
-                                    <div
-                                        key={idx}
-                                        className="flex items-center gap-4 border border-border p-4 rounded-4xl"
+                        <div className="mt-5 grid grid-cols-1 gap-4">
+                            {ProductDetailInfo(product).map((info, idx) => (
+                                <div
+                                    key={idx}
+                                    className="flex items-center gap-4 rounded-[1.5rem] border border-border/70 bg-background/70 p-4"
+                                >
+                                    <span className="rounded-2xl bg-muted p-3">
+                                        <info.icon />
+                                    </span>
+                                    <Heading
+                                        size="p"
+                                        className="w-full line-clamp-2 text-foreground"
                                     >
-                                        <span className="bg-muted p-2 rounded-xl">
-                                            <info.icon />
-                                        </span>
-                                        <Heading
-                                            key={idx}
-                                            size="p"
-                                            className={
-                                                "text-foreground w-full line-clamp-2"
-                                            }
-                                        >
-                                            {info.label} - <b>{info.value}</b>
-                                        </Heading>
-                                    </div>
-                                ))}
-                            </div>
+                                        {info.label} - <b>{info.value}</b>
+                                    </Heading>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
@@ -354,12 +340,15 @@ function ProductDetails() {
 
             <Separator />
 
-            <div className="flex flex-col gap-20">
+            <div className="flex flex-col gap-10">
                 <Trust isTitleHidden />
-                <div className="flex flex-col gap-6">
-                    <Heading size="h4" className={"font-semibold"}>
-                        Customer Reviews
-                    </Heading>
+                <div className="space-y-6">
+                    <div className="space-y-3">
+                        <Heading size="small" className="text-primary/70">
+                            Customer feedback
+                        </Heading>
+                        <Heading size="h3">What shoppers are saying</Heading>
+                    </div>
                     <Carousel
                         plugins={[autoplayPlugin]}
                         opts={{
@@ -370,29 +359,23 @@ function ProductDetails() {
                         <CarouselContent>
                             {reviews.map((review, idx) => (
                                 <CarouselItem
-                                    className="basis-1/1 md:basis-1/2 xl:basis-1/3"
+                                    className="basis-full md:basis-1/2 xl:basis-1/3"
                                     key={idx}
                                 >
-                                    <div className="flex flex-col gap-4 border border-border hover:bg-muted duration-300 p-6 rounded-4xl h-full">
+                                    <div className="flex h-full flex-col gap-4 rounded-[1.8rem] border border-border/70 bg-white/92 p-6 shadow-sm">
                                         <div className="flex items-center justify-between">
-                                            <Heading
-                                                size="p"
-                                                className={
-                                                    "text-muted-foreground"
-                                                }
-                                            >
-                                                {new Date(
-                                                    review.date
-                                                ).toLocaleDateString()}
+                                            <Heading size="p">
+                                                {new Date(review.date).toLocaleDateString()}
                                             </Heading>
                                             <div className="flex items-center gap-1">
                                                 {Array.from({ length: 5 }).map(
-                                                    (_, idx) => (
+                                                    (_, starIdx) => (
                                                         <Star
-                                                            key={idx}
+                                                            key={starIdx}
                                                             className={cn(
+                                                                "size-4",
                                                                 review.rating >
-                                                                    idx
+                                                                    starIdx
                                                                     ? "fill-yellow-500 stroke-yellow-500"
                                                                     : "fill-muted stroke-muted-foreground/30"
                                                             )}
@@ -401,28 +384,15 @@ function ProductDetails() {
                                                 )}
                                             </div>
                                         </div>
-                                        <div className="flex flex-col gap-1">
-                                            <Heading
-                                                size="h5"
-                                                className={"font-medium"}
-                                            >
+                                        <div className="space-y-1">
+                                            <Heading size="h5" className="font-medium">
                                                 {review.reviewerName}
                                             </Heading>
-                                            <Heading
-                                                size="p"
-                                                className={
-                                                    "text-muted-foreground"
-                                                }
-                                            >
+                                            <Heading size="p">
                                                 {review.reviewerEmail}
                                             </Heading>
                                         </div>
-                                        <Heading
-                                            size="h6"
-                                            className={
-                                                "text-foreground line-clamp-3"
-                                            }
-                                        >
+                                        <Heading size="p" className="leading-7 text-foreground">
                                             {review.comment}
                                         </Heading>
                                     </div>
@@ -437,7 +407,7 @@ function ProductDetails() {
 
             <ProductSection
                 products={limitedProducts}
-                title={"You Might Also Like"}
+                title="You Might Also Like"
             />
         </div>
     );

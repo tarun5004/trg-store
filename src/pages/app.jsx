@@ -10,24 +10,21 @@ function App() {
     const { categories, trending, newArrivals, bestSellers } = useLoaderData();
 
     useEffect(() => {
-        document.title = "EzStore — Home";
+        document.title = "TRG Store - Home";
     }, []);
 
     return (
-        <div className="flex flex-col gap-20">
-            <div className="flex flex-col gap-10">
+        <div className="flex flex-col gap-16 lg:gap-20">
+            <div className="flex flex-col gap-8 lg:gap-10">
                 <Hero />
                 <Slider />
             </div>
             <Categories categories={categories} />
-            <ProductSection
-                products={trending}
-                title={"Our Trending Products"}
-            />
+            <ProductSection products={trending} title="Trending Right Now" />
             <Trust />
             <Slider />
-            <ProductSection products={newArrivals} title={"New Arrivals"} />
-            <ProductSection products={bestSellers} title={"Best Sellers"} />
+            <ProductSection products={newArrivals} title="Fresh New Arrivals" />
+            <ProductSection products={bestSellers} title="Best Sellers" />
         </div>
     );
 }

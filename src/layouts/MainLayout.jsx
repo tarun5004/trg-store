@@ -19,12 +19,14 @@ function MainLayout() {
     }
 
     return (
-        <div className="flex flex-col min-h-screen items-center w-11/12 xl:max-w-4/5 mx-auto gap-10 py-10">
-            <Navbar />
-            <div className="flex-1 w-full">
-                <Outlet />
+        <div className="min-h-screen w-full">
+            <div className="mx-auto flex min-h-screen w-[min(94%,1380px)] flex-col gap-8 py-4 lg:py-6">
+                <Navbar />
+                <div className="flex-1 w-full pb-8">
+                    <Outlet />
+                </div>
+                <Footer />
             </div>
-            <Footer />
         </div>
     );
 }

@@ -37,7 +37,7 @@ function SignUp() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        document.title = "EzStore — Sign Up";
+        document.title = "TRG Store - Sign Up";
     }, []);
 
     const signUpForm = useForm({
@@ -68,26 +68,27 @@ function SignUp() {
     };
 
     return (
-        <div className="flex flex-col gap-6 w-full">
+        <div className="flex w-full flex-col gap-6">
             <BadgeDollarSign
                 size={64}
-                className="p-4 bg-foreground text-background rounded-xl"
+                className="rounded-2xl bg-primary p-4 text-primary-foreground shadow-[0_20px_40px_-26px_rgba(86,39,29,0.95)]"
             />
             <div className="flex flex-col gap-2">
-                <Heading size="h5">
-                    <span className="font-normal">Create your </span>{" "}
-                    <b>EzStore</b> account
+                <Heading size="small" className="text-primary/70">
+                    Create your account
                 </Heading>
-                <Heading size="h6" className="text-muted-foreground">
-                    Start your journey with us and experience the best of
-                    e-commerce solutions.
+                <Heading size="h4">
+                    Join <b>TRG Store</b>
+                </Heading>
+                <Heading size="p" className="leading-7">
+                    Start shopping with the new premium storefront while keeping the same familiar account flow.
                 </Heading>
             </div>
             <form
                 onSubmit={signUpForm.handleSubmit(onSubmit)}
                 className="flex flex-col gap-6"
             >
-                <FieldSet className={"gap-4"}>
+                <FieldSet className="gap-4">
                     <FieldGroup>
                         <Controller
                             name="fullName"
@@ -97,13 +98,13 @@ function SignUp() {
                                     <FieldLabel htmlFor="fullName">
                                         Full Name
                                     </FieldLabel>
-                                    <InputGroup>
+                                    <InputGroup className="bg-background/75">
                                         <InputGroupAddon>
                                             <User />
                                         </InputGroupAddon>
                                         <InputGroupInput
                                             id="fullName"
-                                            placeholder="Harshit Jain"
+                                            placeholder="Tarun Raj Gaur"
                                             {...field}
                                         />
                                     </InputGroup>
@@ -125,14 +126,14 @@ function SignUp() {
                                     <FieldLabel htmlFor="email">
                                         Email
                                     </FieldLabel>
-                                    <InputGroup>
+                                    <InputGroup className="bg-background/75">
                                         <InputGroupAddon>
                                             <Mail />
                                         </InputGroupAddon>
                                         <InputGroupInput
                                             id="email"
                                             type="email"
-                                            placeholder="example@example.com"
+                                            placeholder="tarun@example.com"
                                             {...field}
                                         />
                                     </InputGroup>
@@ -154,23 +155,15 @@ function SignUp() {
                                     <FieldLabel htmlFor="password">
                                         Password
                                     </FieldLabel>
-                                    <InputGroup>
+                                    <InputGroup className="bg-background/75">
                                         <InputGroupInput
                                             id="password"
-                                            type={
-                                                showPassword
-                                                    ? "text"
-                                                    : "password"
-                                            }
-                                            placeholder="•••••••••"
+                                            type={showPassword ? "text" : "password"}
+                                            placeholder="Create a secure password"
                                             {...field}
                                         />
                                         <InputGroupAddon>
-                                            {!showPassword ? (
-                                                <Lock />
-                                            ) : (
-                                                <Unlock />
-                                            )}
+                                            {!showPassword ? <Lock /> : <Unlock />}
                                         </InputGroupAddon>
                                         <InputGroupAddon align="inline-end">
                                             <InputGroupButton
@@ -179,16 +172,10 @@ function SignUp() {
                                                 aria-label="Toggle Password Visibility"
                                                 title="Toggle Password Visibility"
                                                 onClick={() => {
-                                                    setShowPassword(
-                                                        !showPassword
-                                                    );
+                                                    setShowPassword(!showPassword);
                                                 }}
                                             >
-                                                {showPassword ? (
-                                                    <Eye />
-                                                ) : (
-                                                    <EyeOff />
-                                                )}
+                                                {showPassword ? <Eye /> : <EyeOff />}
                                             </InputGroupButton>
                                         </InputGroupAddon>
                                     </InputGroup>
@@ -213,7 +200,7 @@ function SignUp() {
             <Heading size="p" className="text-center">
                 Already have an account?{" "}
                 <Link
-                    className="text-primary font-medium decoration-wavy underline-offset-4 hover:underline active:underline"
+                    className="font-medium text-primary underline-offset-4 hover:underline"
                     to="/auth/sign-in"
                 >
                     Sign In

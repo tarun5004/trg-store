@@ -10,10 +10,10 @@ import {
 } from "lucide-react";
 
 export const aboutStats = [
-    { icon: Users, value: "10,000+", label: "Happy Customers" },
-    { icon: Globe, value: "50+", label: "Countries Served" },
-    { icon: Award, value: "200+", label: "Brand Partnerships" },
-    { icon: TrendingUp, value: "98%", label: "Satisfaction Rate" },
+    { icon: Users, value: "18,000+", label: "Style-First Shoppers" },
+    { icon: Globe, value: "80+", label: "Cities Reached" },
+    { icon: Award, value: "250+", label: "Curated Labels" },
+    { icon: TrendingUp, value: "97%", label: "Repeat Purchase Rate" },
 ];
 
 export const aboutValues = [
@@ -21,32 +21,32 @@ export const aboutValues = [
         icon: Heart,
         color: "text-pink-500",
         bg: "bg-pink-500/10",
-        title: "Customer First",
+        title: "Curated With Intent",
         description:
-            "Every decision we make starts with one question: is this good for our customers? Your satisfaction drives everything we do.",
+            "Every edit at TRG Store is chosen to feel elevated, wearable, and worth keeping. We focus on fewer, better picks.",
     },
     {
         icon: ShieldCheck,
         color: "text-green-500",
         bg: "bg-green-500/10",
-        title: "Trust & Safety",
+        title: "Trust In Every Order",
         description:
-            "We partner only with verified sellers and use end-to-end encryption on every transaction so you shop with complete confidence.",
+            "Verified partners, transparent pricing, and secure checkout keep the experience dependable from browse to delivery.",
     },
     {
         icon: Rocket,
         color: "text-blue-500",
         bg: "bg-blue-500/10",
-        title: "Fast & Reliable",
+        title: "Fast, Thoughtful Fulfilment",
         description:
-            "Same-day dispatch on thousands of items and real-time order tracking — because waiting shouldn't be part of the experience.",
+            "Quick dispatch, live updates, and a smoother post-purchase journey mean your order experience feels polished too.",
     },
     {
         icon: Star,
         color: "text-amber-500",
         bg: "bg-amber-500/10",
-        title: "Quality Guaranteed",
+        title: "Premium Everyday Value",
         description:
-            "Every product on EzStore is curated for quality. Not happy? Our hassle-free 30-day return policy has you covered.",
+            "We balance trend, quality, and price so every product feels aspirational without losing day-to-day practicality.",
     },
 ];

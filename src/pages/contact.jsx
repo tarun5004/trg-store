@@ -25,7 +25,7 @@ function Contact() {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        document.title = "EzStore — Contact";
+        document.title = "TRG Store - Contact";
     }, []);
 
     const contactForm = useForm({
@@ -44,7 +44,7 @@ function Contact() {
         setFocus("fullName");
     }, [setFocus]);
 
-    const onSubmit = (data) => {
+    const onSubmit = () => {
         setLoading(true);
         setTimeout(() => {
             setLoading(false);
@@ -55,27 +55,51 @@ function Contact() {
     };
 
     return (
-        <div className="flex flex-col gap-20 py-20">
-            <div className="flex flex-col items-center gap-6 text-center">
-                <Badge variant="info">Get in Touch</Badge>
-                <div className="flex flex-col gap-2">
-                    <Heading size="h3" className={"font-semibold"}>
-                        We&apos;d love to hear from you
-                    </Heading>
-                    <Heading size="h6" className={"text-muted-foreground"}>
-                        Have a question, feedback, or just want to say hello?
-                        Fill out the form below and our team will respond within
-                        24 hours.
-                    </Heading>
+        <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-10">
+            <div className="rounded-[2.2rem] border border-border/70 bg-[linear-gradient(135deg,rgba(96,48,35,0.96),rgba(176,96,68,0.9))] p-8 text-white shadow-[0_30px_90px_-55px_rgba(63,29,22,0.75)] sm:p-10">
+                <Badge variant="secondary">Get in Touch</Badge>
+                <Heading size="h3" className="mt-5 text-white">
+                    Talk to the TRG Store team.
+                </Heading>
+                <Heading size="p" className="mt-4 text-white/75 leading-7">
+                    Questions, feedback, or support requests are all welcome. The flow stays simple and the experience now looks more premium too.
+                </Heading>
+                <div className="mt-8 space-y-4">
+                    <div className="rounded-[1.5rem] border border-white/15 bg-white/10 p-4">
+                        <Heading size="small" className="text-white/70">
+                            Response window
+                        </Heading>
+                        <Heading size="p" className="mt-2 text-white/80">
+                            Typically within 24 hours
+                        </Heading>
+                    </div>
+                    <div className="rounded-[1.5rem] border border-white/15 bg-white/10 p-4">
+                        <Heading size="small" className="text-white/70">
+                            Best for
+                        </Heading>
+                        <Heading size="p" className="mt-2 text-white/80">
+                            Order help, product questions, feedback, and partnership conversations
+                        </Heading>
+                    </div>
                 </div>
             </div>
 
             <form
                 onSubmit={contactForm.handleSubmit(onSubmit)}
-                className="w-full max-w-2xl mx-auto flex flex-col gap-5"
+                className="rounded-[2.2rem] border border-border/70 bg-white/92 p-6 shadow-sm sm:p-8"
             >
+                <div className="mb-6 space-y-3">
+                    <Heading size="small" className="text-primary/70">
+                        Contact form
+                    </Heading>
+                    <Heading size="h4">Send us a message</Heading>
+                    <Heading size="p" className="leading-7">
+                        Fill out the form below and we&apos;ll get back to you soon.
+                    </Heading>
+                </div>
+
                 <FieldSet className="gap-4">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                         <FieldGroup>
                             <Controller
                                 name="fullName"
@@ -85,13 +109,13 @@ function Contact() {
                                         <FieldLabel htmlFor="fullName">
                                             Full Name
                                         </FieldLabel>
-                                        <InputGroup>
+                                        <InputGroup className="bg-background/75">
                                             <InputGroupAddon>
                                                 <User />
                                             </InputGroupAddon>
                                             <InputGroupInput
                                                 id="fullName"
-                                                placeholder="Jane Doe"
+                                                placeholder="Tarun Raj Gaur"
                                                 {...field}
                                             />
                                         </InputGroup>
@@ -114,14 +138,14 @@ function Contact() {
                                         <FieldLabel htmlFor="email">
                                             Email
                                         </FieldLabel>
-                                        <InputGroup>
+                                        <InputGroup className="bg-background/75">
                                             <InputGroupAddon>
                                                 <Mail />
                                             </InputGroupAddon>
                                             <InputGroupInput
                                                 id="email"
                                                 type="email"
-                                                placeholder="jane@example.com"
+                                                placeholder="tarun@example.com"
                                                 {...field}
                                             />
                                         </InputGroup>
@@ -145,13 +169,13 @@ function Contact() {
                                     <FieldLabel htmlFor="subject">
                                         Subject
                                     </FieldLabel>
-                                    <InputGroup>
+                                    <InputGroup className="bg-background/75">
                                         <InputGroupAddon>
                                             <Tag />
                                         </InputGroupAddon>
                                         <InputGroupInput
                                             id="subject"
-                                            placeholder="Order issue, product question…"
+                                            placeholder="Order issue or product question"
                                             {...field}
                                         />
                                     </InputGroup>
@@ -174,11 +198,11 @@ function Contact() {
                                     <FieldLabel htmlFor="message">
                                         Message
                                     </FieldLabel>
-                                    <InputGroup>
+                                    <InputGroup className="bg-background/75">
                                         <InputGroupTextarea
                                             id="message"
-                                            rows={5}
-                                            placeholder="Tell us how we can help…"
+                                            rows={6}
+                                            placeholder="Tell us how we can help."
                                             {...field}
                                         />
                                     </InputGroup>
@@ -193,7 +217,12 @@ function Contact() {
                     </FieldGroup>
                 </FieldSet>
 
-                <Button type="submit" isLoading={loading} disabled={loading}>
+                <Button
+                    type="submit"
+                    isLoading={loading}
+                    disabled={loading}
+                    className="mt-6"
+                >
                     Send Message
                 </Button>
             </form>
